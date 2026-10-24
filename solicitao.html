@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gíro | Área do morador</title>
+
+  <style>
+    :root {
+      --verde: #16834a;
+      --verde-escuro: #0d6135;
+      --verde-claro: #e9f6ee;
+      --fundo: #f5f8f5;
+      --texto: #1d2b22;
+      --cinza: #66736a;
+      --borda: #dce6de;
+      --branco: #fff;
+      --sombra: 0 8px 24px rgba(19, 55, 31, .07);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      color: var(--texto);
+      background: var(--fundo);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .topo {
+      background: var(--branco);
+      border-bottom: 1px solid var(--borda);
+    }
+
+    .barra {
+      width: min(1120px, calc(100% - 32px));
+      min-height: 70px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .marca {
+      color: var(--verde-escuro);
+      font-size: 1.25rem;
+      font-weight: 800;
+      text-decoration: none;
+    }
+
+    .marca span {
+      color: var(--texto);
+      font-weight: 500;
+    }
+
+    .atalhos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .atalhos a {
+      color: var(--cinza);
+      font-size: .92rem;
+      text-decoration: none;
+    }
+
+    .atalhos a:hover {
+      color: var(--verde);
+    }
+
+    main {
+      width: min(1120px, calc(100% - 32px));
+      margin: 32px auto 60px;
+    }
+
+    .boas-vindas {
+      margin-bottom: 24px;
+    }
+
+    .boas-vindas h1 {
+      margin: 0 0 6px;
+      font-size: clamp(1.7rem, 4vw, 2.25rem);
+    }
+
+    .boas-vindas p {
+      margin: 0;
+      color: var(--cinza);
+    }
+
+    .grade {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 20px;
+      align-items: start;
+    }
+
+    .coluna {
+      display: grid;
+      gap: 20px;
+    }
+
+    .cartao {
+      padding: 22px;
+      background: var(--branco);
+      border: 1px solid var(--borda);
+      border-radius: 16px;
+      box-shadow: var(--sombra);
+    }
+
+    .cartao h2 {
+      margin: 0 0 16px;
+      font-size: 1.15rem;
+    }
+
+    .campo {
+      margin-bottom: 14px;
+    }
+
+    .campo label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: .9rem;
+      font-weight: 700;
+    }
+
+    .campo input,
+    .campo select {
+      width: 100%;
+      min-height: 44px;
+      padding: 10px 12px;
+      color: var(--texto);
+      background: #fff;
+      border: 1px solid var(--borda);
+      border-radius: 9px;
+    }
+
+    .campo input:focus,
+    .campo select:focus {
+      outline: 3px solid rgba(22, 131, 74, .14);
+      border-color: var(--verde);
+    }
+
+    .duas-colunas {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .botao {
+      min-height: 44px;
+      padding: 10px 16px;
+      color: #fff;
+      background: var(--verde);
+      border: 0;
+      border-radius: 9px;
+      font-weight: 700;
+    }
+
+    .botao:hover {
+      background: var(--verde-escuro);
+    }
+
+    .botao-secundario {
+      color: var(--verde-escuro);
+      background: var(--verde-claro);
+    }
+
+    .botao-secundario:hover {
+      background: #d8efdf;
+    }
+
+    .botao-largo {
+      width: 100%;
+    }
+
+    .mensagem {
+      min-height: 22px;
+      margin: 10px 0 0;
+      color: var(--verde-escuro);
+      font-size: .9rem;
+    }
+
+    .lista {
+      display: grid;
+      gap: 12px;
+    }
+
+    .item {
+      padding: 14px;
+      border: 1px solid var(--borda);
+      border-radius: 11px;
+    }
+
+    .item strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .item p {
+      margin: 0;
+      color: var(--cinza);
+      font-size: .9rem;
+    }
+
+    .status {
+      display: inline-block;
+      margin-top: 9px;
+      padding: 4px 9px;
+      color: #805900;
+      background: #fff3cd;
+      border-radius: 999px;
+      font-size: .78rem;
+      font-weight: 700;
+    }
+
+    .vazio {
+      color: var(--cinza);
+      font-size: .92rem;
+    }
+
+    .dicas {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--cinza);
+    }
+
+    .dicas li + li {
+      margin-top: 9px;
+    }
+
+    .nota {
+      margin-top: 14px;
+      padding: 11px 12px;
+      color: var(--verde-escuro);
+      background: var(--verde-claro);
+      border-radius: 9px;
+      font-size: .88rem;
+    }
+
+    footer {
+      padding: 22px 16px;
+      color: var(--cinza);
+      text-align: center;
+      font-size: .85rem;
+    }
+
+    @media (max-width: 760px) {
+      .grade {
+        grid-template-columns: 1fr;
+      }
+
+      .barra {
+        align-items: flex-start;
+        flex-direction: column;
+        padding: 16px 0;
+      }
+
+      .atalhos {
+        gap: 12px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .duas-colunas {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+
+      .cartao {
+        padding: 18px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topo">
+    <div class="barra">
+      <a class="marca" href="#">♻ Gíro <span>| Morador</span></a>
+      <nav class="atalhos" aria-label="Navegação principal">
+        <a href="#solicitar">Solicitar coleta</a>
+        <a href="#pontos">Pontos de coleta</a>
+        <a href="#orientacoes">Como separar</a>
+        <a href="#status">Minhas solicitações</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="boas-vindas">
+      <h1>Recicle sem complicação</h1>
+      <p>Solicite uma coleta, encontre pontos próximos e acompanhe seus pedidos.</p>
+    </section>
+
+    <div class="grade">
+      <div class="coluna">
+        <section class="cartao" id="solicitar">
+          <h2>Solicitar coleta de recicláveis</h2>
+
+          <form id="form-coleta">
+            <div class="campo">
+              <label for="endereco">Endereço</label>
+              <input
+                id="endereco"
+                name="endereco"
+                type="text"
+                placeholder="Rua, avenida ou local"
+                required
+              >
+            </div>
+
+            <div class="duas-colunas">
+              <div class="campo">
+                <label for="numero">Número</label>
+                <input id="numero" name="numero" type="text" placeholder="Ex.: 120" required>
+              </div>
+
+              <div class="campo">
+                <label for="bairro">Bairro</label>
+                <input id="bairro" name="bairro" type="text" placeholder="Seu bairro" required>
+              </div>
+            </div>
+
+            <div class="campo">
+              <label for="material">Tipo de material</label>
+              <select id="material" name="material" required>
+                <option value="">Selecione um material</option>
+                <option value="Papel e papelão">Papel e papelão</option>
+                <option value="Plástico">Plástico</option>
+                <option value="Vidro">Vidro</option>
+                <option value="Metal">Metal</option>
+                <option value="Eletrônicos">Eletrônicos</option>
+                <option value="Óleo de cozinha">Óleo de cozinha</option>
+                <option value="Materiais variados">Materiais variados</option>
+              </select>
+            </div>
+
+            <button class="botao botao-largo" type="submit">Enviar solicitação</button>
+            <p class="mensagem" id="mensagem-form" role="status" aria-live="polite"></p>
+          </form>
+        </section>
+
+        <section class="cartao" id="status">
+          <h2>Acompanhe suas solicitações</h2>
+          <div class="lista" id="lista-solicitacoes">
+            <p class="vazio">Você ainda não tem solicitações.</p>
+          </div>
+        </section>
+      </div>
+
+      <div class="coluna">
+        <section class="cartao" id="pontos">
+          <h2>Pontos de coleta próximos</h2>
+          <p class="vazio">
+            Informe seu bairro para consultar pontos de coleta disponíveis.
+          </p>
+
+          <div class="campo">
+            <label for="bairro-busca">Bairro</label>
+            <input id="bairro-busca" type="text" placeholder="Digite seu bairro">
+          </div>
+
+          <button class="botao botao-secundario" id="buscar-pontos" type="button">
+            Consultar pontos
+          </button>
+          <div class="lista" id="resultado-pontos" aria-live="polite"></div>
+        </section>
+
+        <section class="cartao" id="orientacoes">
+          <h2>Como preparar os materiais</h2>
+          <ul class="dicas">
+            <li><strong>Papel e papelão:</strong> mantenha secos e dobre as caixas.</li>
+            <li><strong>Plásticos:</strong> esvazie as embalagens e, se possível, enxágue.</li>
+            <li><strong>Vidros:</strong> lave os recipientes e embale cacos com segurança.</li>
+            <li><strong>Metais:</strong> retire restos de alimentos e amasse latas.</li>
+            <li><strong>Eletrônicos:</strong> não descarte junto com o lixo comum.</li>
+            <li><strong>Óleo de cozinha:</strong> guarde frio em uma garrafa bem fechada.</li>
+          </ul>
+          <div class="nota">
+            Confira as regras da coleta da sua cidade: os materiais aceitos podem variar.
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    ReciclaJá — uma iniciativa para facilitar o descarte responsável.
+  </footer>
+
+  <script>
+    const CHAVE = "reciclaja-solicitacoes";
+
+    function carregarSolicitacoes() {
+      try {
+        return JSON.parse(localStorage.getItem(CHAVE)) || [];
+      } catch {
+        return [];
+      }
+    }
+
+    function salvarSolicitacoes(solicitacoes) {
+      localStorage.setItem(CHAVE, JSON.stringify(solicitacoes));
+    }
+
+    function mostrarSolicitacoes() {
+      const lista = document.getElementById("lista-solicitacoes");
+      const solicitacoes = carregarSolicitacoes();
+
+      if (solicitacoes.length === 0) {
+        lista.innerHTML = '<p class="vazio">Você ainda não tem solicitações.</p>';
+        return;
+      }
+
+      lista.innerHTML = solicitacoes.map((item) => `
+        <article class="item">
+          <strong>${escapar(item.material)}</strong>
+          <p>${escapar(item.endereco)}, ${escapar(item.numero)} — ${escapar(item.bairro)}</p>
+          <span class="status">${escapar(item.status)}</span>
+        </article>
+      `).join("");
+    }
+
+    function escapar(valor) {
+      return String(valor).replace(/[&<>"']/g, (caractere) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#039;"
+      })[caractere]);
+    }
+
+    document.getElementById("form-coleta").addEventListener("submit", (evento) => {
+      evento.preventDefault();
+
+      const formulario = new FormData(evento.currentTarget);
+      const solicitacao = {
+        endereco: formulario.get("endereco").trim(),
+        numero: formulario.get("numero").trim(),
+        bairro: formulario.get("bairro").trim(),
+        material: formulario.get("material"),
+        status: "Solicitação recebida"
+      };
+
+      const solicitacoes = carregarSolicitacoes();
+      solicitacoes.unshift(solicitacao);
+      salvarSolicitacoes(solicitacoes);
+
+      mostrarSolicitacoes();
+      evento.currentTarget.reset();
+      document.getElementById("mensagem-form").textContent =
+        "Solicitação registrada neste dispositivo.";
+    });
+
+    document.getElementById("buscar-pontos").addEventListener("click", () => {
+      const bairro = document.getElementById("bairro-busca").value.trim();
+      const resultado = document.getElementById("resultado-pontos");
+
+      if (!bairro) {
+        resultado.innerHTML = '<p class="mensagem">Digite um bairro para consultar.</p>';
+        return;
+      }
+
+      resultado.innerHTML = `
+        <div class="nota">
+          A consulta de pontos para <strong>${escapar(bairro)}</strong> precisa ser
+          conectada à lista ou ao serviço de coleta da sua cidade.
+        </div>
+      `;
+    });
+
+    mostrarSolicitacoes();
+  </script>
+</body>
+</html>
